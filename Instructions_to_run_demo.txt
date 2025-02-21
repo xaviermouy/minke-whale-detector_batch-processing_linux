@@ -1,0 +1,28 @@
+0- Install python 3.9
+
+1- Download the folder "minke_whale_detector" from GitHub and place it in /home/<username>/Documents/ (replace <username> with you account name). 
+
+2- Setup all configuration files in the minke_whale_detector:
+2a- Open the file /home/<username>/Documents/minke_whale_detector/run_ketos_detector.sh with a text editor
+2b- Change line 11 to: MODEL=/home/<username>/Documents/minke_whale_detector/models/spectro-5s_fft-0.256_step-0.03_fmin-0_fmax-800_no-norm/ketos_model.kt
+2c: Change line 20 to: if [ -d "/home/<username>/Documents/ketos-env" ]; then
+2d: Save and close
+
+3- Setup a processing job:
+3a- Open the file /home/<username>/Documents/minke_whale_detector/processing_queue/Demo_job_configfile.sh with a text editor
+3b- Change line 41 to: AUDIO_DIR=/home/<username>/Documents/minke_whale_detector/demo_data/deployment2
+3c- Change line 45 to: OUTPUT_DIR=/home/<username>/Documents/minke_whale_detector/demo_results
+3d- Change line 50 to: /home/<username>/Documents/minke_whale_detector/scripts/run_ketos_detector.sh
+3e- Save and close
+note: You can create a job config files like this for each deployment to process. All job config files should be placed in the processing_queue folder.
+
+4- Start the run(s)
+4a- Start terminal window
+4b- Type: cd /home/<username>/Documents/minke_whale_detector/
+4c- Type: ./process_queue.sh 
+4d- press enter key. The processing should start. Detection results will be placed in the demo_results folder.
+
+5- Monitor progress/outputs:
+5a- If the run is succesful the job config file will automatically be moved to the folder ./processing_queue/processed.
+5b- If the run failled the job config file will automatically be moved to the folder ./processing_queue/errors.
+5c- Two log files are written alongside the detection resilts (in the folder demo_results). These can be used to monitor/identify issues.
